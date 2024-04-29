@@ -1,0 +1,25 @@
+<section class="homepage">
+  <app-banner
+    bannerUrl="assets/images/banner-homepage.png"
+    bannerAlt="Banner da aplicação Jornada"
+  ></app-banner>
+  <app-container>
+    <h2>Promoções</h2>
+    <app-form-search></app-form-search>
+    <div class="card-wrapper">
+      <app-card-search
+        *ngFor="let promotion of promotions"
+        [promotion]="promotion"
+      />
+    </div>
+    <h2>Depoimentos</h2>
+    <div class="card-wrapper">
+      <app-card-review *ngFor="let review of reviews" [review]="review" />
+    </div>
+  </app-container>
+  <app-banner
+    bannerUrl="assets/images/banner-homepage-rodape.png"
+    bannerAlt="Banner da aplicação Jornada"
+  >
+  </app-banner>
+</section>

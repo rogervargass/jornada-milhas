@@ -1,0 +1,24 @@
+<mat-form-field class="input-container" appearance="outline">
+  <mat-label>{{ label }}</mat-label>
+  <mat-icon matPrefix *ngIf="prefixIcon">
+    {{ prefixIcon }}
+  </mat-icon>
+  <input
+    matInput
+    [placeholder]="label"
+    [formControl]="control"
+    [name]="name"
+    ngDefaultControl
+    [matAutocomplete]="auto"
+  />
+  <mat-icon matSuffix>search</mat-icon>
+  <mat-autocomplete
+    [displayWith]="displayFn"
+    autoActiveFirstOption
+    #auto="matAutocomplete"
+  >
+    <mat-option *ngFor="let state of filteredOptions$ | async" [value]="state">
+      {{ state.nome }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
