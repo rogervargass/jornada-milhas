@@ -9,7 +9,7 @@ import { CardComponent } from './components/card/card.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -35,8 +35,10 @@ import { FormBaseComponent } from './components/form-base/form-base.component';
 import { FormSearchComponent } from './components/form-search/form-search.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { PassengerSelectorComponent } from './components/passenger-selector/passenger-selector.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
@@ -58,6 +60,7 @@ import { RegisterComponent } from './pages/register/register.component';
     LoginComponent,
     RegisterComponent,
     FormBaseComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,10 @@ import { RegisterComponent } from './pages/register/register.component';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [provideAnimationsAsync()],
+  providers: [
+    provideAnimationsAsync(),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
