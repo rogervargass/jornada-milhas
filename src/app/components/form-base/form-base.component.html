@@ -1,11 +1,11 @@
 <app-container>
   <mat-card>
     <form [formGroup]="registerForm">
-      <mat-card-title> Crie sua conta </mat-card-title>
+      <mat-card-title> {{ title }} </mat-card-title>
       <section>
-        <div class="perfil-actions" *ngIf="perfilComponent">
+        <div class="perfil-actions" *ngIf="profileComponent">
           <h2>Dados pessoais</h2>
-          <button mat-stroked-button color="primary">
+          <button (click)="logout()" mat-stroked-button color="primary">
             <mat-icon>logout</mat-icon>
             DESLOGAR
           </button>
@@ -101,8 +101,8 @@
           </div>
         </div>
       </mat-card-content>
-      <mat-divider *ngIf="perfilComponent"></mat-divider>
-      <div class="perfil-access" *ngIf="perfilComponent">
+      <mat-divider *ngIf="profileComponent"></mat-divider>
+      <div class="perfil-access" *ngIf="profileComponent">
         <h2>Dados de acesso</h2>
       </div>
       <mat-card-content>
@@ -182,6 +182,7 @@
           </div>
         </div>
         <mat-checkbox
+          *ngIf="!profileComponent"
           formControlName="acceptTerms"
           color="primary"
           class="full-width"
@@ -203,7 +204,7 @@
           [disabled]="registerForm.invalid"
           color="primary"
         >
-          CADASTRAR
+          {{ btnText }}
         </button>
       </mat-card-actions>
     </form>

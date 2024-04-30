@@ -10,7 +10,7 @@ import { User } from '../../types/type';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-  perfilComponent = false;
+  profileComponent = false;
 
   constructor(
     private formService: FormService,

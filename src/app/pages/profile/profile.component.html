@@ -1,0 +1,11 @@
+<app-banner
+  bannerUrl="assets/images/banner-perfil.png"
+  bannerAlt="Banner  da tela de perfil"
+/>
+<app-form-base
+  [title]="welcomeMessage"
+  [btnText]="buttonText"
+  [profileComponent]="true"
+  (handleLogout)="logout()"
+  (handleClick)="update()"
+/>

@@ -18,8 +18,11 @@ export class FormBaseComponent implements OnInit {
   registerForm!: FormGroup;
   stateControl = new FormControl<StateUnit | null>(null, Validators.required);
 
-  @Input() perfilComponent!: boolean;
+  @Input() profileComponent!: boolean;
+  @Input() title: string = 'Crie sua conta';
+  @Input() btnText: string = 'CADASTRAR';
   @Output() handleClick: EventEmitter<any> = new EventEmitter<any>();
+  @Output() handleLogout: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,13 +35,13 @@ export class FormBaseComponent implements OnInit {
       birthDate: [null, [Validators.required]],
       cpf: ['12312312123', [Validators.required]],
       city: ['City', Validators.required],
-      email: ['chapolin@email.com', [Validators.required, Validators.email]],
-      password: ['123', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(3)]],
       genre: ['outro'],
       phone: ['12312312123', Validators.required],
       state: this.stateControl,
       emailConfirmation: [
-        'chapolin@email.com',
+        '',
         [
           Validators.required,
           Validators.email,
@@ -46,7 +49,7 @@ export class FormBaseComponent implements OnInit {
         ],
       ],
       passwordConfirmation: [
-        '123',
+        '',
         [
           Validators.required,
           Validators.minLength(3),
@@ -55,10 +58,19 @@ export class FormBaseComponent implements OnInit {
       ],
       acceptTerms: [false, [Validators.requiredTrue]],
     });
+
+    if (this.profileComponent) {
+      this.registerForm.get('acceptTerms')?.setValidators(null);
+    }
+
     this.formService.setRegister(this.registerForm);
   }
 
   submit(): void {
     this.handleClick.emit();
+  }
+
+  logout(): void {
+    this.handleLogout.emit();
   }
 }
